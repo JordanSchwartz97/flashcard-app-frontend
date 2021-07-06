@@ -1,17 +1,18 @@
 import React from "react";
-
+import "./FlashcardViewer.css";
 export default function FlashcardViewer(props) {
+	console.log("flashcard viewer is running");
 	return (
 		<div>
 			<div className="row row-spacer">
 				<div className="col">
-					{/* {Button here to move to the previous book viewed} */}
+					<button onClick={() => this.goToPreviousCard()}>Previous Card</button>
 				</div>
 				<div className="col">
-					<h1>{props.deck[props.deckNumber].name}</h1>
+					<h1 className="title">{props.deck.cardDeck.title}</h1>
 				</div>
 				<div className="col">
-					{/* {Button here to move to the next book} */}
+					<button onClick={() => this.goToNextCard()}>Next Card</button>
 				</div>
 				<div className="col">{/* {Flashcard Counter} */}</div>
 			</div>

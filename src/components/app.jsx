@@ -6,14 +6,14 @@ import ViewDeck from "./ViewDeck/ViewDeck.js";
 import e from "cors";
 import CreateDeck from "./CreateDeck/CreateDeck";
 import CreateCard from "./CreateCard/CreateCard";
-
+import FlashcardViewer from "./FlashcardViewer/FlashcardViewer";
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			deck: [],
 			flashcards: [],
-			deckNumber: 0,
+			cardNumber: 0,
 			itemId: "",
 		};
 	}
@@ -21,6 +21,7 @@ class App extends Component {
 	componentDidMount() {
 		this.getAllDecks();
 		console.log("component did mount");
+		console.log(this.state.deck);
 	}
 
 	async getAllDecks() {
@@ -55,6 +56,26 @@ class App extends Component {
 		let addDeck = await axios.post("http://localhost:5000/api/collections");
 		console.log(addDeck.data);
 	}
+	goToNextCard() {
+		let tempCardNumber = this.state.cardNumber;
+		tempCardNumber++;
+		if (tempCardNumber === this.deck.length) {
+			tempCardNumber = 0;
+		}
+		this.setState({
+			cardNumber: tempCardNumber,
+		});
+	}
+	goToNextCard() {
+		let tempCardNumber = this.state.cardNumber;
+		tempCardNumber--;
+		if (tempCardNumber < 0) {
+			tempCardNumber = this.deck.length - 1;
+		}
+		this.setState({
+			cardNumber: tempCardNumber,
+		});
+	}
 
 	render() {
 		let count = this.state.deck.length;
@@ -62,14 +83,14 @@ class App extends Component {
 		if (count > 0) {
 			isLoaded = true;
 		}
-
 		return (
 			<div>
 				<Navbar />
-				{isLoaded ? <h1>Page is Loaded.</h1> : <h1>Loading...</h1>}
+				{isLoaded ? <h1>{this.state.deck.length}</h1> : <h1>Loading...</h1>}
 				<ViewDeck deck={this.state.deck} />
 				<CreateDeck />
 				<CreateCard />
+				<FlashcardViewer deck={this.state.deck} />
 			</div>
 		);
 	}
