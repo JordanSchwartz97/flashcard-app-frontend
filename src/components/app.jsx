@@ -4,12 +4,17 @@ import axios from "axios";
 import "./app.css";
 import ViewDeck from "./ViewDeck/ViewDeck.js";
 import e from "cors";
+import CreateDeck from "./CreateDeck/CreateDeck";
+import CreateCard from "./CreateCard/CreateCard";
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			deck: [],
+			flashcards: [],
+			deckNumber: 0,
+			itemId: "",
 		};
 	}
 
@@ -32,6 +37,25 @@ class App extends Component {
 		}
 	}
 
+	async getAllFlashcards() {
+		try {
+			let response = await axios.get(
+				"http://localhost:5000/api/collections/cardDeck/"
+			);
+			console.log(response.data);
+			this.setState({
+				flashcards: response.data,
+			});
+		} catch (ex) {
+			console.log(ex);
+		}
+	}
+
+	async addNewDeck() {
+		let addDeck = await axios.post("http://localhost:5000/api/collections");
+		console.log(addDeck.data);
+	}
+
 	render() {
 		let count = this.state.deck.length;
 		let isLoaded = false;
@@ -42,8 +66,10 @@ class App extends Component {
 		return (
 			<div>
 				<Navbar />
-				{isLoaded ? <h1>{count}</h1> : <h1>Loading...</h1>}
+				{isLoaded ? <h1>Page is Loaded.</h1> : <h1>Loading...</h1>}
 				<ViewDeck deck={this.state.deck} />
+				<CreateDeck />
+				<CreateCard />
 			</div>
 		);
 	}

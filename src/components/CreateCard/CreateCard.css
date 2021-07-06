@@ -1,0 +1,22 @@
+form {
+	position: relative;
+	width: 80%;
+	height: 80%;
+	padding-top: 20px;
+	padding-bottom: 50px;
+	padding-left: 50px;
+}
+
+.card-card {
+	position: relative;
+	width: 30%;
+	height: 85%;
+	top: 420px;
+	left: 1200px;
+}
+.form-group {
+	margin-top: 20px;
+}
+.btn {
+	margin-top: 10px;
+}
