@@ -9,35 +9,35 @@ export default function CreateCard() {
 					<input
 						type="text"
 						className="form-control"
-						id="titleFormGroup"
+						id="DeckNameFormControl"
 						placeholder="Name of Deck"
 					></input>
-					<small id="emailHelp" class="form-text text-muted">
+					<small id="deckHelp" class="form-text text-muted">
 						Enter the name of the Deck you would like to add a flashcard too.
 					</small>
 				</div>
 				<div className="form-group">
-					<label for="descriptionFormGroup">Front content of Flashcard</label>
+					<label for="FrontFormGroup">Front content of Flashcard</label>
 					<input
 						type="text"
 						className="form-control"
-						id="descriptionFormGroup"
-						placeholder="Front"
+						id="FrontFormGroup"
+						placeholder="Front of flashcard"
 					></input>
 				</div>
 				<div className="form-group">
-					<label for="descriptionFormGroup">Description of Deck</label>
+					<label for="BackFormGroup">Back content of Flashcard</label>
 					<input
 						type="text"
 						className="form-control"
-						id="descriptionFormGroup"
-						placeholder="Description of Deck"
+						id="BackFormGroup"
+						placeholder="Back of flashcard"
 					></input>
 				</div>
 				<input
 					class="btn btn-primary"
 					type="submit"
-					value="Add new Deck"
+					value="Add new Flashcard"
 				></input>
 			</form>
 		</div>

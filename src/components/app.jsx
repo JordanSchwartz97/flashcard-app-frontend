@@ -15,15 +15,15 @@ class App extends Component {
 			flashcards: [],
 			cardNumber: 0,
 			itemId: "",
+			selectedDeck: [],
 		};
 	}
 
 	componentDidMount() {
 		this.getAllDecks();
 		console.log("component did mount");
-		console.log(this.state.deck);
+		console.log(this.state.selectedDeck);
 	}
-
 	async getAllDecks() {
 		try {
 			let response = await axios.get(
@@ -32,6 +32,7 @@ class App extends Component {
 			console.log(response.data);
 			this.setState({
 				deck: response.data,
+				selectedDeck: response.data[0].cardDeck,
 			});
 		} catch (ex) {
 			console.log(ex);
@@ -43,7 +44,6 @@ class App extends Component {
 			let response = await axios.get(
 				"http://localhost:5000/api/collections/cardDeck/"
 			);
-			console.log(response.data);
 			this.setState({
 				flashcards: response.data,
 			});
@@ -56,6 +56,7 @@ class App extends Component {
 		let addDeck = await axios.post("http://localhost:5000/api/collections");
 		console.log(addDeck.data);
 	}
+
 	goToNextCard() {
 		let tempCardNumber = this.state.cardNumber;
 		tempCardNumber++;
@@ -80,9 +81,11 @@ class App extends Component {
 	render() {
 		let count = this.state.deck.length;
 		let isLoaded = false;
+
 		if (count > 0) {
 			isLoaded = true;
 		}
+		console.log(this.state.selectedDeck);
 		return (
 			<div>
 				<Navbar />
@@ -90,7 +93,7 @@ class App extends Component {
 				<ViewDeck deck={this.state.deck} />
 				<CreateDeck />
 				<CreateCard />
-				<FlashcardViewer deck={this.state.deck} />
+				<FlashcardViewer selectedDeck={this.state.selectedDeck} />
 			</div>
 		);
 	}

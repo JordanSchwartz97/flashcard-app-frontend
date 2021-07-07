@@ -1,6 +1,7 @@
 import React from "react";
 import "./ViewDeck.css";
 import FlashcardViewer from "../FlashcardViewer/FlashcardViewer";
+
 export default function ViewDeck(props) {
 	return (
 		<div>
@@ -30,7 +31,7 @@ export default function ViewDeck(props) {
 							<td id="id" className="id">
 								{item._id}
 							</td>
-							<button onClick={FlashcardViewer}>View Deck</button>
+							<button onClick="">View Deck</button>
 						</tr>
 					</table>
 				);
